@@ -186,6 +186,7 @@ public class ReputationManager {
 			statement.setInt(5, reputation); // 変更
 			statement.setInt(6, nowreputation); // 変更後
 			statement.executeUpdate();
+			Discord.send("293856671799967744", "__**[jaoReputation]**__ " + player.getName() + " : " + reputation + " - (" + performer.getName() + ") -> " + nowreputation);
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
 		}
@@ -208,6 +209,7 @@ public class ReputationManager {
 			statement.setInt(6, nowreputation); // 変更後
 			statement.setString(7, reason);
 			statement.executeUpdate();
+			Discord.send("293856671799967744", "__**[jaoReputation]**__ " + player.getName() + " : " + reputation + " - (" + performer.getName() + ") -> " + nowreputation + "\nReason:```" + reason + "```");
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
 		}
