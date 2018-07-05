@@ -19,6 +19,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.jaoafa.jaoReputation.Command.Cmd_Bad;
+import com.jaoafa.jaoReputation.Command.Cmd_Good;
 import com.jaoafa.jaoReputation.Lib.Discord;
 import com.jaoafa.jaoReputation.Lib.MySQL;
 import com.jaoafa.jaoReputation.Lib.PermissionsManager;
@@ -34,7 +36,7 @@ public class JaoReputation extends JavaPlugin {
 	/**
 	 * プラグインが起動したときに呼び出し
 	 * @author mine_book000
-	 * @since 2018/04/30
+	 * @since 2018/07/05
 	 */
 	@Override
 	public void onEnable() {
@@ -42,10 +44,21 @@ public class JaoReputation extends JavaPlugin {
 
 		// リスナーを設定
 		Import_Listener();
+		// コマンドを設定
+		Import_Command_Executor();
 
 		Load_Config(); // Config Load
 	}
 
+	/**
+	 * コマンドの設定
+	 * @author mine_book000
+	 */
+	private void Import_Command_Executor(){
+		// 日付は制作完了(登録)の日付
+		getCommand("good").setExecutor(new Cmd_Good(this)); // 2018/07/05
+		getCommand("bad").setExecutor(new Cmd_Bad(this)); // 2018/07/05
+	}
 	/**
 	 * リスナー設定
 	 * @author mine_book000
@@ -65,7 +78,7 @@ public class JaoReputation extends JavaPlugin {
 	/**
 	 * プラグインが停止したときに呼び出し
 	 * @author mine_book000
-	 * @since 2018/04/30
+	 * @since 2018/07/05
 	 */
 	@Override
 	public void onDisable() {
@@ -178,7 +191,7 @@ public class JaoReputation extends JavaPlugin {
 		for(Player p: Bukkit.getServer().getOnlinePlayers()) {
 			String group = PermissionsManager.getPermissionMainGroup(p);
 			if(group.equalsIgnoreCase("Admin") || group.equalsIgnoreCase("Moderator")) {
-				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "MyMaidのシステム障害が発生しました。");
+				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "jaoReputationのシステム障害が発生しました。");
 				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "エラー: " + exception.getMessage());
 			}
 		}
@@ -187,7 +200,7 @@ public class JaoReputation extends JavaPlugin {
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		exception.printStackTrace(pw);
-		boolean res = Discord.send("293856671799967744", "MyMaidでエラーが発生しました。" + "\n"
+		boolean res = Discord.send("293856671799967744", "jaoReputationでエラーが発生しました。" + "\n"
 				+ "```" + sw.toString() + "```\n"
 				+ "Cause: `" + exception.getCause() + "`\n"
 				+ "報告ID: `" + id + "`");
@@ -203,7 +216,7 @@ public class JaoReputation extends JavaPlugin {
 	}
 	public static JavaPlugin JavaPlugin(){
 		if(JaoReputation.JavaPlugin == null){
-			throw new NullPointerException("getJavaPlugin()が呼び出されましたが、MyMaid2.javapluginはnullでした。");
+			throw new NullPointerException("getJavaPlugin()が呼び出されましたが、JaoReputation.javapluginはnullでした。");
 		}
 		return JaoReputation.JavaPlugin;
 	}

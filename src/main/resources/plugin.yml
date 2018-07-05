@@ -5,3 +5,14 @@ description: jao Minecraft Server 保護プラグイン
 database: true
 softdepend: [PermissionsEx, LuckPerms]
 author: mine_book000
+commands:
+   good:
+      description: プレイヤーをGOODとして評価します。
+      usage: /good <Player> [Reason]
+      permission: jaoreputation.good
+      permission-message: You do not have permission to perform this command.
+   bad:
+      description: プレイヤーをBADとして評価します。
+      usage: /bad <Player> [Reason]
+      permission: jaoreputation.bad
+      permission-message: You do not have permission to perform this command.
