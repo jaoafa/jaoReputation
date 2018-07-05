@@ -1,0 +1,7 @@
+name: jaoReputation
+main: com.jaoafa.jaoReputation.JaoReputation
+version: 0.0.1
+description: jao Minecraft Server 保護プラグイン
+database: true
+softdepend: [PermissionsEx, LuckPerms]
+author: mine_book000
