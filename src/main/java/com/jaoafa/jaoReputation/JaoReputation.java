@@ -21,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.jaoafa.jaoReputation.Command.Cmd_Bad;
 import com.jaoafa.jaoReputation.Command.Cmd_Good;
+import com.jaoafa.jaoReputation.Command.Cmd_Rep;
 import com.jaoafa.jaoReputation.Lib.Discord;
 import com.jaoafa.jaoReputation.Lib.MySQL;
 import com.jaoafa.jaoReputation.Lib.PermissionsManager;
@@ -58,6 +59,7 @@ public class JaoReputation extends JavaPlugin {
 		// 日付は制作完了(登録)の日付
 		getCommand("good").setExecutor(new Cmd_Good(this)); // 2018/07/05
 		getCommand("bad").setExecutor(new Cmd_Bad(this)); // 2018/07/05
+		getCommand("rep").setExecutor(new Cmd_Rep(this)); // 2018/07/05
 	}
 	/**
 	 * リスナー設定

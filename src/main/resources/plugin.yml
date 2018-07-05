@@ -16,3 +16,8 @@ commands:
       usage: /bad <Player> [Reason]
       permission: jaoreputation.bad
       permission-message: You do not have permission to perform this command.
+   rep:
+      description: プレイヤーのjao Reputationを調べます。
+      usage: /rep <Player>
+      permission: jaoreputation.rep
+      permission-message: You do not have permission to perform this command.

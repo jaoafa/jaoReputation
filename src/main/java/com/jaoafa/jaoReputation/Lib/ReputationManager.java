@@ -4,7 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.jaoafa.jaoReputation.JaoReputation;
@@ -65,6 +69,13 @@ public class ReputationManager {
 			}
 			int rep = getReputation();
 			Logger(performer, 1, rep);
+			for(Player p : Bukkit.getOnlinePlayers()){
+				String group = PermissionsManager.getPermissionMainGroup(performer);
+				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
+					break;
+				}
+				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
+			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
@@ -84,6 +95,13 @@ public class ReputationManager {
 			}
 			int rep = getReputation();
 			Logger(performer, 1, rep, reason);
+			for(Player p : Bukkit.getOnlinePlayers()){
+				String group = PermissionsManager.getPermissionMainGroup(performer);
+				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
+					break;
+				}
+				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
+			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
@@ -103,6 +121,13 @@ public class ReputationManager {
 			}
 			int rep = getReputation();
 			Logger(performer, -1, rep);
+			for(Player p : Bukkit.getOnlinePlayers()){
+				String group = PermissionsManager.getPermissionMainGroup(performer);
+				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
+					break;
+				}
+				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
+			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
@@ -123,6 +148,13 @@ public class ReputationManager {
 			}
 			int rep = getReputation();
 			Logger(performer, -1, rep, reason);
+			for(Player p : Bukkit.getOnlinePlayers()){
+				String group = PermissionsManager.getPermissionMainGroup(performer);
+				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
+					break;
+				}
+				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
+			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
 			JaoReputation.BugReporter(e);
@@ -147,8 +179,10 @@ public class ReputationManager {
 	}
 	public static int getTodayGoodBadCount(Player player){
 		try {
-			PreparedStatement statement = MySQL.getNewPreparedStatement("SELECT COUNT(*) FROM jaoReputation_History WHERE performer_uuid = ?");
+			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			PreparedStatement statement = MySQL.getNewPreparedStatement("SELECT COUNT(*) FROM jaoReputation_History WHERE performer_uuid = ? AND date LIKE ?");
 			statement.setString(1, player.getUniqueId().toString());
+			statement.setString(2, date.format(new Date()) + "%");
 			ResultSet res = statement.executeQuery();
 			if(res.next()){
 				return res.getInt(1);

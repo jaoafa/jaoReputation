@@ -56,9 +56,9 @@ public class Cmd_Good implements CommandExecutor {
 				return true;
 			}
 			if(rm.Good(performer)){
-				JaoReputation.SendMessage(sender, cmd, "実行に成功しました。");
+				JaoReputation.SendMessage(sender, cmd, "プレイヤー「" + player.getName() + "」をGOODとして評価しました。");
 			}else{
-				JaoReputation.SendMessage(sender, cmd, "実行に失敗しました…");
+				JaoReputation.SendMessage(sender, cmd, "プレイヤー「" + player.getName() + "」をGOODとして評価できませんでした。");
 			}
 			return true;
 		}else if(args.length == 2){
