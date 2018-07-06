@@ -70,11 +70,11 @@ public class ReputationManager {
 			int rep = getReputation();
 			Logger(performer, 1, rep);
 			for(Player p : Bukkit.getOnlinePlayers()){
-				String group = PermissionsManager.getPermissionMainGroup(performer);
+				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
-					break;
+					continue;
 				}
-				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
+				p.sendMessage("[jaoReputation] " + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
 			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -96,11 +96,11 @@ public class ReputationManager {
 			int rep = getReputation();
 			Logger(performer, 1, rep, reason);
 			for(Player p : Bukkit.getOnlinePlayers()){
-				String group = PermissionsManager.getPermissionMainGroup(performer);
+				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
-					break;
+					continue;
 				}
-				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
+				p.sendMessage("[jaoReputation] " + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.AQUA + "GOOD" + ChatColor.GREEN + "しました！");
 			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -122,11 +122,11 @@ public class ReputationManager {
 			int rep = getReputation();
 			Logger(performer, -1, rep);
 			for(Player p : Bukkit.getOnlinePlayers()){
-				String group = PermissionsManager.getPermissionMainGroup(performer);
+				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
-					break;
+					continue;
 				}
-				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
+				p.sendMessage("[jaoReputation] " + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
 			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -149,11 +149,11 @@ public class ReputationManager {
 			int rep = getReputation();
 			Logger(performer, -1, rep, reason);
 			for(Player p : Bukkit.getOnlinePlayers()){
-				String group = PermissionsManager.getPermissionMainGroup(performer);
+				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
-					break;
+					continue;
 				}
-				p.sendMessage("[jaoReputation]" + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
+				p.sendMessage("[jaoReputation] " + ChatColor.GREEN + player.getName() + "を" + performer.getName() + "が「" + reason + "」という理由で" + ChatColor.RED + "BAD" + ChatColor.GREEN + "しました…");
 			}
 			return true;
 		} catch (ClassNotFoundException | SQLException e) {
