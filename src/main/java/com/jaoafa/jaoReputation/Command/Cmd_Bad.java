@@ -2,6 +2,7 @@ package com.jaoafa.jaoReputation.Command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +18,7 @@ public class Cmd_Bad implements CommandExecutor {
 	public Cmd_Bad(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)){
@@ -32,14 +34,9 @@ public class Cmd_Bad implements CommandExecutor {
 		if(args.length == 1){
 			// 理由なし
 			String playername = args[0];
-			Player player = Bukkit.getPlayerExact(playername);
+			OfflinePlayer player = Bukkit.getOfflinePlayer(playername);
 			if(player == null){
 				JaoReputation.SendMessage(sender, cmd, "指定されたプレイヤー「" + playername + "」は見つかりませんでした。");
-
-				Player any_chance_player = Bukkit.getPlayer(playername);
-				if(any_chance_player != null){
-					JaoReputation.SendMessage(sender, cmd, "もしかして: " + any_chance_player.getName());
-				}
 				return true;
 			}
 			JaoReputation.SendMessage(sender, cmd, ChatColor.GRAY + "Good, Badを付ける際は、できる限り理由(Reason)を付けてください。/bad <Reason>");
@@ -64,14 +61,9 @@ public class Cmd_Bad implements CommandExecutor {
 		}else if(args.length == 2){
 			// 理由あり
 			String playername = args[0];
-			Player player = Bukkit.getPlayerExact(playername);
+			OfflinePlayer player = Bukkit.getOfflinePlayer(playername);
 			if(player == null){
 				JaoReputation.SendMessage(sender, cmd, "指定されたプレイヤー「" + playername + "」は見つかりませんでした。");
-
-				Player any_chance_player = Bukkit.getPlayer(playername);
-				if(any_chance_player != null){
-					JaoReputation.SendMessage(sender, cmd, "もしかして: " + any_chance_player.getName());
-				}
 				return true;
 			}
 			String reason = "";

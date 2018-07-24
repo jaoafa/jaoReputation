@@ -9,14 +9,15 @@ import java.util.Date;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.jaoafa.jaoReputation.JaoReputation;
 
 public class ReputationManager {
-	private Player player = null;
+	private OfflinePlayer player = null;
 	private int ID = -1; // jaoReputation ID
-	public ReputationManager(Player player){
+	public ReputationManager(OfflinePlayer player){
 		this.player = player;
 		try {
 			PreparedStatement statement = MySQL.getNewPreparedStatement("SELECT * FROM jaoReputation WHERE uuid = ?");
@@ -231,7 +232,7 @@ public class ReputationManager {
 		}
 		return -1;
 	}
-	public static int getTodayGoodBadCount(Player player){
+	public static int getTodayGoodBadCount(OfflinePlayer player){
 		try {
 			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 			PreparedStatement statement = MySQL.getNewPreparedStatement("SELECT COUNT(*) FROM jaoReputation_History WHERE performer_uuid = ? AND date LIKE ?");
@@ -252,7 +253,7 @@ public class ReputationManager {
 		if(player == null){
 			throw new IllegalStateException();
 		}
-		String group = PermissionsManager.getPermissionMainGroup(player);
+		String group = PermissionsManager.getPermissionMainGroup(player.getName());
 		if(group.equalsIgnoreCase("QPPE") || group.equalsIgnoreCase("Default")){
 			return true;
 		}
