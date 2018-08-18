@@ -58,7 +58,7 @@ public class Cmd_Bad implements CommandExecutor {
 				JaoReputation.SendMessage(sender, cmd, "プレイヤー「" + player.getName() + "」をBADとして評価できませんでした。");
 			}
 			return true;
-		}else if(args.length == 2){
+		}else if(args.length >= 2){
 			// 理由あり
 			String playername = args[0];
 			OfflinePlayer player = Bukkit.getOfflinePlayer(playername);
