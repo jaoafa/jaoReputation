@@ -22,6 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.jaoafa.jaoReputation.Command.Cmd_Bad;
 import com.jaoafa.jaoReputation.Command.Cmd_Good;
 import com.jaoafa.jaoReputation.Command.Cmd_Rep;
+import com.jaoafa.jaoReputation.Event.Event_LoginLogoutDiffRepNotice;
 import com.jaoafa.jaoReputation.Lib.Discord;
 import com.jaoafa.jaoReputation.Lib.MySQL;
 import com.jaoafa.jaoReputation.Lib.PermissionsManager;
@@ -67,6 +68,7 @@ public class JaoReputation extends JavaPlugin {
 	 */
 	private void Import_Listener(){
 		// 日付は制作完了(登録)の日付
+		registEvent(new Event_LoginLogoutDiffRepNotice(this)); // 2018/11/11
 	}
 
 	/**

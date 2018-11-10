@@ -122,7 +122,7 @@ public class ReputationManager {
 				return false;
 			}
 			int rep = getReputation();
-			Logger(performer, performer_uuid, -1, rep, reason);
+			Logger(performer, performer_uuid, -good, rep, reason);
 			for(Player p : Bukkit.getOnlinePlayers()){
 				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
@@ -202,7 +202,7 @@ public class ReputationManager {
 				return false;
 			}
 			int rep = getReputation();
-			Logger(performer, performer_uuid, -1, rep, reason);
+			Logger(performer, performer_uuid, -bad, rep, reason);
 			for(Player p : Bukkit.getOnlinePlayers()){
 				String group = PermissionsManager.getPermissionMainGroup(p);
 				if(!group.equalsIgnoreCase("Admin") && !group.equalsIgnoreCase("Moderator") && !group.equalsIgnoreCase("Regular")){
